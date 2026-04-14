@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { Moon, Sun, Menu, X } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import { toggleTheme } from '@/store/themeSlice'
+import { toggleTheme, setTheme } from '@/store/themeSlice'
 
 const navLinks = [
   { label: 'Home', href: '#home' },
@@ -20,7 +20,11 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
-  // Apply dark class + persist to localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem('theme')
+    if (saved === 'dark') dispatch(setTheme(true))
+  }, [dispatch])
+
   useEffect(() => {
     const root = document.documentElement
     if (isDark) {
@@ -32,12 +36,6 @@ export default function Navbar() {
     }
   }, [isDark])
 
-  // Read persisted preference on mount
-  useEffect(() => {
-    const saved = localStorage.getItem('theme')
-    if (saved === 'dark') dispatch({ type: 'theme/setTheme', payload: true })
-  }, [dispatch])
-
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', onScroll)
@@ -46,13 +44,22 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-[var(--background)]/90 backdrop-blur-md shadow-sm'
-          : 'bg-transparent'
-      }`}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 50,
+        transition: 'all 0.3s',
+        backgroundColor: scrolled ? 'var(--bg-90)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(12px)' : 'none',
+        boxShadow: scrolled ? '0 1px 4px rgba(0,0,0,0.06)' : 'none',
+      }}
     >
-      <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <nav
+        style={{ maxWidth: 1100, margin: '0 auto', width: '100%' }}
+        className="px-6 h-16 flex items-center justify-between"
+      >
         {/* Logo */}
         <a href="#home" className="flex-shrink-0">
           <Image
@@ -70,7 +77,8 @@ export default function Navbar() {
             <li key={link.label}>
               <a
                 href={link.href}
-                className="text-sm font-medium text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
+                style={{ color: 'var(--foreground)', fontSize: 14, fontWeight: 500 }}
+                className="hover:opacity-60 transition-opacity"
               >
                 {link.label}
               </a>
@@ -78,53 +86,57 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Right side actions */}
+        {/* Right side */}
         <div className="flex items-center gap-3">
-          {/* Dark mode toggle */}
           <button
             onClick={() => dispatch(toggleTheme())}
             aria-label="Toggle dark mode"
-            className="p-2 rounded-full hover:bg-[var(--muted)] transition-colors"
+            style={{ backgroundColor: 'var(--muted)', borderRadius: '50%', padding: 8 }}
           >
-            {isDark ? (
-              <Sun size={18} className="text-[var(--foreground)]" />
-            ) : (
-              <Moon size={18} className="text-[var(--foreground)]" />
-            )}
+            {isDark
+              ? <Sun size={16} style={{ color: 'var(--foreground)' }} />
+              : <Moon size={16} style={{ color: 'var(--foreground)' }} />
+            }
           </button>
 
-          {/* Contact Me button */}
           <a
             href="#contact"
-            className="hidden md:inline-flex items-center gap-1.5 bg-[var(--foreground)] text-[var(--background)] text-sm font-medium px-5 py-2 rounded-full hover:opacity-80 transition-opacity"
+            className="hidden md:inline-flex items-center"
+            style={{
+              backgroundColor: 'var(--foreground)',
+              color: 'var(--background)',
+              fontSize: 13,
+              fontWeight: 600,
+              padding: '8px 20px',
+              borderRadius: 999,
+            }}
           >
             Contact Me
           </a>
 
-          {/* Mobile hamburger */}
           <button
             className="md:hidden p-2"
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
           >
-            {menuOpen ? (
-              <X size={20} className="text-[var(--foreground)]" />
-            ) : (
-              <Menu size={20} className="text-[var(--foreground)]" />
-            )}
+            {menuOpen
+              ? <X size={20} style={{ color: 'var(--foreground)' }} />
+              : <Menu size={20} style={{ color: 'var(--foreground)' }} />
+            }
           </button>
         </div>
       </nav>
 
-      {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-[var(--background)] border-t border-[var(--border)] px-6 py-4 flex flex-col gap-4">
+        <div
+          className="md:hidden px-6 py-4 flex flex-col gap-4"
+          style={{ backgroundColor: 'var(--background)', borderTop: '1px solid var(--border)' }}
+        >
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
               onClick={() => setMenuOpen(false)}
-              className="text-sm font-medium text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
+              style={{ color: 'var(--foreground)', fontSize: 14, fontWeight: 500 }}
             >
               {link.label}
             </a>
@@ -132,7 +144,8 @@ export default function Navbar() {
           <a
             href="#contact"
             onClick={() => setMenuOpen(false)}
-            className="inline-flex justify-center bg-[var(--foreground)] text-[var(--background)] text-sm font-medium px-5 py-2 rounded-full"
+            className="text-center rounded-full py-2"
+            style={{ backgroundColor: 'var(--foreground)', color: 'var(--background)', fontSize: 13, fontWeight: 600 }}
           >
             Contact Me
           </a>

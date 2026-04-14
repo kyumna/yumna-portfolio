@@ -16,35 +16,35 @@ const tools = [
 
 export default function About() {
   return (
-    <section id="about" className="py-24 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section id="about" style={{ width: '100%', padding: '96px 24px' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto', width: '100%' }}>
 
         {/* Section label */}
-        <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)] text-center mb-3">
+        <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--accent)', textAlign: 'center', marginBottom: 48 }}>
           About me
         </p>
 
-        <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
-          {/* Left — portrait */}
-          <div className="flex-shrink-0 w-64 md:w-72">
-            <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-lg">
+          {/* Portrait */}
+          <div style={{ maxWidth: 320, margin: '0 auto', width: '100%' }}>
+            <div style={{ position: 'relative', width: '100%', aspectRatio: '3/4', borderRadius: 20, overflow: 'hidden', boxShadow: '0 8px 30px rgba(0,0,0,0.12)' }}>
               <Image
                 src="/assets/Mask group.png"
-                alt="William portrait"
+                alt="Portrait"
                 fill
-                className="object-cover"
+                style={{ objectFit: 'cover' }}
               />
             </div>
           </div>
 
-          {/* Right — content */}
-          <div className="flex-1">
-            <h2 className="text-3xl md:text-4xl font-bold text-[var(--foreground)] mb-4">
+          {/* Content */}
+          <div style={{ minWidth: 0 }}>
+            <h2 style={{ fontSize: 36, fontWeight: 700, color: 'var(--foreground)', marginBottom: 16 }}>
               About me
             </h2>
 
-            <p className="text-[var(--foreground)]/60 leading-relaxed mb-8 max-w-lg">
+            <p style={{ color: 'var(--fg-60)', lineHeight: 1.8, marginBottom: 32, fontSize: 15 }}>
               I&apos;m a frontend web developer based in London with over 5 years of
               experience building modern, performant web applications. I love
               turning complex problems into simple, beautiful interfaces. When
@@ -53,45 +53,29 @@ export default function About() {
             </p>
 
             {/* Stats */}
-            <div className="flex flex-wrap gap-6 mb-8">
+            <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', marginBottom: 28 }}>
               {stats.map((stat) => (
-                <div key={stat.label} className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[var(--muted)] flex items-center justify-center flex-shrink-0">
-                    <Image
-                      src={stat.icon}
-                      alt={stat.label}
-                      width={20}
-                      height={20}
-                      className="object-contain"
-                    />
+                <div key={stat.label} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  <div style={{ width: 40, height: 40, borderRadius: 12, backgroundColor: 'var(--muted)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <Image src={stat.icon} alt={stat.label} width={20} height={20} style={{ objectFit: 'contain' }} />
                   </div>
                   <div>
-                    <p className="text-xl font-bold text-[var(--foreground)] leading-none">
-                      {stat.value}
-                    </p>
-                    <p className="text-xs text-[var(--foreground)]/50 mt-0.5">
-                      {stat.label}
-                    </p>
+                    <p style={{ fontSize: 20, fontWeight: 700, color: 'var(--foreground)', lineHeight: 1 }}>{stat.value}</p>
+                    <p style={{ fontSize: 12, color: 'var(--fg-50)', marginTop: 2 }}>{stat.label}</p>
                   </div>
                 </div>
               ))}
             </div>
 
             {/* Tools */}
-            <div className="flex items-center gap-4 flex-wrap">
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               {tools.map((tool) => (
                 <div
                   key={tool.alt}
-                  className="w-10 h-10 rounded-xl bg-[var(--muted)] flex items-center justify-center hover:scale-110 transition-transform"
                   title={tool.alt}
+                  style={{ width: 40, height: 40, borderRadius: 12, backgroundColor: 'var(--muted)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                 >
-                  <Image
-                    src={tool.src}
-                    alt={tool.alt}
-                    width={24}
-                    height={24}
-                    className="object-contain"
-                  />
+                  <Image src={tool.src} alt={tool.alt} width={24} height={24} style={{ objectFit: 'contain' }} />
                 </div>
               ))}
             </div>

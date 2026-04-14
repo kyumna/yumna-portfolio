@@ -17,65 +17,42 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[var(--muted)] border-t border-[var(--border)] px-6 py-12">
-      <div className="max-w-6xl mx-auto">
+    <footer style={{ width: '100%', backgroundColor: 'var(--muted)', borderTop: '1px solid var(--border)', padding: '48px 24px' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto', width: '100%' }}>
 
         {/* Top row */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-10">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8" style={{ marginBottom: 32 }}>
 
-          {/* Logo */}
           <a href="#home">
-            <Image
-              src="/assets/Group 4228.png"
-              alt="William."
-              width={130}
-              height={34}
-              className="h-8 w-auto"
-            />
+            <Image src="/assets/Group 4228.png" alt="William." width={130} height={34} className="h-8 w-auto" />
           </a>
 
-          {/* Nav links */}
-          <ul className="flex flex-wrap justify-center gap-6">
+          <ul style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 24, listStyle: 'none' }}>
             {navLinks.map((link) => (
               <li key={link.label}>
-                <a
-                  href={link.href}
-                  className="text-sm text-[var(--foreground)]/60 hover:text-[var(--foreground)] transition-colors"
-                >
+                <a href={link.href} style={{ fontSize: 13, color: 'var(--fg-60)', textDecoration: 'none' }}>
                   {link.label}
                 </a>
               </li>
             ))}
           </ul>
 
-          {/* Social icons */}
-          <div className="flex items-center gap-3">
+          <div style={{ display: 'flex', gap: 10 }}>
             {socials.map((s) => (
-              <a
-                key={s.alt}
-                href={s.href}
-                aria-label={s.alt}
-                className="w-10 h-10 rounded-xl overflow-hidden hover:scale-110 transition-transform"
-              >
-                <Image
-                  src={s.icon}
-                  alt={s.alt}
-                  width={40}
-                  height={40}
-                  className="object-cover w-full h-full"
-                />
+              <a key={s.alt} href={s.href} aria-label={s.alt}
+                style={{ width: 40, height: 40, borderRadius: 12, overflow: 'hidden', display: 'block' }}>
+                <Image src={s.icon} alt={s.alt} width={40} height={40} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </a>
             ))}
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-[var(--border)] mb-6" />
+        <div style={{ borderTop: '1px solid var(--border)', marginBottom: 20 }} />
 
-        {/* Bottom row */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[var(--foreground)]/40">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-2"
+          style={{ fontSize: 12, color: 'var(--fg-40)' }}>
           <p>© {new Date().getFullYear()} William. All rights reserved.</p>
-          <p>Designed &amp; built with Next.js &amp; Tailwind CSS</p>
+          <p>Built with Next.js &amp; Tailwind CSS</p>
         </div>
       </div>
     </footer>

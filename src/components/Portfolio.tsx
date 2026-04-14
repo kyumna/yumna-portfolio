@@ -1,80 +1,56 @@
 import Image from 'next/image'
 
 const projects = [
-  {
-    image: '/assets/Rectangle 41969.png',
-    title: 'Payment App',
-    category: 'Mobile Design',
-  },
-  {
-    image: '/assets/Rectangle 41971.png',
-    title: 'Maps Navigation',
-    category: 'Mobile Design',
-  },
-  {
-    image: '/assets/Rectangle 41973.png',
-    title: 'Web Portfolio',
-    category: 'Web Design',
-  },
-  {
-    image: '/assets/Rectangle 41975.png',
-    title: 'UX Research',
-    category: 'UI/UX Design',
-  },
+  { image: '/assets/Rectangle 41969.png', title: 'Payment App', category: 'Mobile Design' },
+  { image: '/assets/Rectangle 41971.png', title: 'Maps Navigation', category: 'Mobile Design' },
+  { image: '/assets/Rectangle 41973.png', title: 'Web Portfolio', category: 'Web Design' },
+  { image: '/assets/Rectangle 41975.png', title: 'UX Research', category: 'UI/UX Design' },
 ]
 
 export default function Portfolio() {
   return (
-    <section id="portfolio" className="py-24 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section id="portfolio" style={{ width: '100%', padding: '96px 24px' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto', width: '100%' }}>
 
-        {/* Section label */}
-        <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)] text-center mb-3">
+        <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--accent)', textAlign: 'center', marginBottom: 12 }}>
           My portfolio
         </p>
 
-        <h2 className="text-3xl md:text-4xl font-bold text-[var(--foreground)] text-center mb-4">
+        <h2 style={{ fontSize: 36, fontWeight: 700, color: 'var(--foreground)', textAlign: 'center', marginBottom: 12 }}>
           My latest work
         </h2>
 
-        <p className="text-sm text-[var(--foreground)]/50 text-center max-w-md mx-auto mb-14">
-          A selection of projects I&apos;ve designed and built — from mobile apps
-          to full web experiences.
+        <p style={{ fontSize: 14, color: 'var(--fg-50)', textAlign: 'center', maxWidth: 420, margin: '0 auto 56px' }}>
+          A selection of projects I&apos;ve designed and built — from mobile apps to full web experiences.
         </p>
 
-        {/* Projects grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {projects.map((project) => (
             <div
               key={project.title}
-              className="group relative rounded-2xl overflow-hidden aspect-[4/5] cursor-pointer"
+              className="group"
+              style={{ position: 'relative', borderRadius: 20, overflow: 'hidden', aspectRatio: '4/5', cursor: 'pointer' }}
             >
-              {/* Project image */}
               <Image
                 src={project.image}
                 alt={project.title}
                 fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                style={{ objectFit: 'cover', transition: 'transform 0.5s' }}
+                className="group-hover:scale-105"
               />
-
-              {/* Dark overlay on hover */}
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-300" />
-
-              {/* Info + arrow — slides up on hover */}
-              <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                <p className="text-xs text-white/70 mb-1">{project.category}</p>
-                <div className="flex items-center justify-between">
-                  <h3 className="text-base font-semibold text-white">
-                    {project.title}
-                  </h3>
-                  <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0">
-                    <Image
-                      src="/assets/Vector.png"
-                      alt="open"
-                      width={12}
-                      height={12}
-                      className="object-contain"
-                    />
+              <div
+                className="group-hover:opacity-100"
+                style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0)', transition: 'background 0.3s' }}
+              />
+              <div
+                className="group-hover:opacity-100 group-hover:translate-y-0"
+                style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: 20, opacity: 0, transform: 'translateY(8px)', transition: 'all 0.3s', background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)' }}
+              >
+                <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.7)', marginBottom: 4 }}>{project.category}</p>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <h3 style={{ fontSize: 15, fontWeight: 600, color: '#fff' }}>{project.title}</h3>
+                  <div style={{ width: 32, height: 32, borderRadius: '50%', backgroundColor: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <Image src="/assets/Vector.png" alt="open" width={12} height={12} style={{ objectFit: 'contain' }} />
                   </div>
                 </div>
               </div>
@@ -82,17 +58,11 @@ export default function Portfolio() {
           ))}
         </div>
 
-        {/* Show more button */}
-        <div className="flex justify-center mt-12">
-          <button className="inline-flex items-center gap-2 border border-[var(--border)] text-[var(--foreground)] text-sm font-medium px-7 py-3 rounded-full hover:bg-[var(--muted)] transition-colors">
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 48 }}>
+          <button
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 8, border: '1px solid var(--border)', color: 'var(--foreground)', fontSize: 13, fontWeight: 500, padding: '10px 28px', borderRadius: 999, backgroundColor: 'transparent', cursor: 'pointer' }}
+          >
             Show more
-            <Image
-              src="/assets/Group 4229.png"
-              alt="arrow"
-              width={14}
-              height={14}
-              className="opacity-60"
-            />
           </button>
         </div>
       </div>

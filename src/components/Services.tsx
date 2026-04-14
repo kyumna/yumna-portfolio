@@ -4,75 +4,53 @@ const services = [
   {
     icon: '/assets/Group 4250.png',
     title: 'Web Design',
-    description:
-      'Clean, modern websites crafted with attention to detail, usability, and brand identity.',
+    description: 'Clean, modern websites crafted with attention to detail, usability, and brand identity.',
   },
   {
     icon: '/assets/Group 4251.png',
     title: 'Mobile App',
-    description:
-      'Cross-platform mobile experiences that feel native, fast, and intuitive on any device.',
+    description: 'Cross-platform mobile experiences that feel native, fast, and intuitive on any device.',
   },
   {
     icon: '/assets/Group 4252.png',
     title: 'UI/UX Design',
-    description:
-      'User-centered design that balances aesthetics with seamless, delightful interactions.',
+    description: 'User-centered design that balances aesthetics with seamless, delightful interactions.',
   },
   {
     icon: '/assets/Group 4253.png',
     title: 'Graphics Design',
-    description:
-      'Eye-catching visuals, brand assets, and illustrations that communicate your story.',
+    description: 'Eye-catching visuals, brand assets, and illustrations that communicate your story.',
   },
 ]
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 px-6 bg-[var(--muted)]">
-      <div className="max-w-6xl mx-auto">
+    <section id="services" style={{ width: '100%', padding: '96px 24px', backgroundColor: 'var(--muted)' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto', width: '100%' }}>
 
-        {/* Section label */}
-        <p className="text-xs font-semibold uppercase tracking-widest text-[var(--accent)] text-center mb-3">
+        <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--accent)', textAlign: 'center', marginBottom: 12 }}>
           What I do
         </p>
 
-        <h2 className="text-3xl md:text-4xl font-bold text-[var(--foreground)] text-center mb-4">
+        <h2 style={{ fontSize: 36, fontWeight: 700, color: 'var(--foreground)', textAlign: 'center', marginBottom: 12 }}>
           My services
         </h2>
 
-        <p className="text-sm text-[var(--foreground)]/50 text-center max-w-md mx-auto mb-14">
-          I offer a range of creative and technical services to help bring your
-          digital vision to life.
+        <p style={{ fontSize: 14, color: 'var(--fg-50)', textAlign: 'center', maxWidth: 420, margin: '0 auto 56px' }}>
+          I offer a range of creative and technical services to help bring your digital vision to life.
         </p>
 
-        {/* Cards grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service) => (
             <div
               key={service.title}
-              className="bg-[var(--card)] rounded-2xl p-6 flex flex-col gap-4 shadow-sm hover:shadow-md transition-shadow group"
+              style={{ backgroundColor: 'var(--card)', borderRadius: 20, padding: 24, display: 'flex', flexDirection: 'column', gap: 16, boxShadow: '0 1px 4px rgba(0,0,0,0.06)' }}
             >
-              {/* Icon */}
-              <div className="w-14 h-14 rounded-2xl overflow-hidden flex-shrink-0">
-                <Image
-                  src={service.icon}
-                  alt={service.title}
-                  width={56}
-                  height={56}
-                  className="object-cover w-full h-full"
-                />
+              <div style={{ width: 56, height: 56, borderRadius: 16, overflow: 'hidden', flexShrink: 0 }}>
+                <Image src={service.icon} alt={service.title} width={56} height={56} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
-
-              {/* Title */}
-              <h3 className="text-base font-semibold text-[var(--foreground)]">
-                {service.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-sm text-[var(--foreground)]/55 leading-relaxed">
-                {service.description}
-              </p>
+              <h3 style={{ fontSize: 15, fontWeight: 600, color: 'var(--foreground)' }}>{service.title}</h3>
+              <p style={{ fontSize: 13, color: 'var(--fg-50)', lineHeight: 1.7 }}>{service.description}</p>
             </div>
           ))}
         </div>
