@@ -20,14 +20,23 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
+  // Apply dark class + persist to localStorage
   useEffect(() => {
     const root = document.documentElement
     if (isDark) {
       root.classList.add('dark')
+      localStorage.setItem('theme', 'dark')
     } else {
       root.classList.remove('dark')
+      localStorage.setItem('theme', 'light')
     }
   }, [isDark])
+
+  // Read persisted preference on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('theme')
+    if (saved === 'dark') dispatch({ type: 'theme/setTheme', payload: true })
+  }, [dispatch])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
